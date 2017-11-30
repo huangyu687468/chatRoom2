@@ -1,5 +1,5 @@
 # chatRoom2
-基于java socket的多人聊天室
+基于java socket
 
 Socket编程技术编写的多人聊天室
 
