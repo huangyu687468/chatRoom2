@@ -1,0 +1,5 @@
+package com.xtu.client;
+
+public class ChatFrame extends JFrame implements ActionListener{
+
+}

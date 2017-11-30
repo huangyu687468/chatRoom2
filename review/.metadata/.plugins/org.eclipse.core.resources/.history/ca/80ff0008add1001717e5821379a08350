@@ -1,0 +1,15 @@
+package com.xtu.server;
+
+/**
+ * 该类用来不停地向客户端广播数据
+ * @author Administrator
+ */
+public class BroadCast extends Thread{
+
+	private ServerThread serverThread;
+	public boolean flag_exit = false;
+	public BroadCast(ServerThread serverThread) {
+		this.serverThread = serverThread;
+	}
+	
+}

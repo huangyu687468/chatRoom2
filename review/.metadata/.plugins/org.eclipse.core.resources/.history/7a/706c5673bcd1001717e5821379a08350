@@ -1,0 +1,75 @@
+package com.xtu.server;
+
+import java.io.IOException;
+
+/**
+ * 该类用来不停地向客户端广播数据
+ * @author Administrator
+ */
+public class BroadCast extends Thread{
+
+	private ServerThread serverThread;
+	public boolean flag_exit = false;
+	private String mess;
+	public BroadCast(ServerThread serverThread) {
+		this.serverThread = serverThread;
+	}
+	
+	public void run(){
+		//如何向客户端发送数据呢？
+		while(flag_exit){
+			boolean flag = true;
+			//从容器中拿出数据，先判断容器中是否有数据
+			if(serverThread.message.isEmpty()){
+				continue;
+			}else{
+				//同步代码块，一个线程在操作的时候不允许
+				//另外的线程操作
+				synchronized(serverThread.message){
+					//获取第一条信息
+					mess = serverThread.message.firstElement();
+					System.out.println(mess);
+					//删除该信息
+					serverThread.message.remove(mess);
+					if(serverThread.message.contains("@clientThread")){
+						flag = false;
+					}
+				}
+				synchronized(serverThread.clients){
+					//遍历线程集合 取得每一个线程
+					for(int i = 0; i<serverThread.clients.size();i++){
+						//获得线程ID 
+						ClientThread clientThread = serverThread.clients.get(i);
+						int threadID = (int)clientThread.getId();
+						if(flag){
+							System.out.println(message);
+							if(serverThread.message.contains("@chat")){
+								try {
+									System.out.println(11);
+									clientThread.dos.writeUTF(mess);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}else{
+							String value = serverThread.users.get(threadID);
+							//如果根据线程id得到值中是“@login@”说明还没有完成登录
+							if("@login@".equals(value)){
+								//发送mess 完成第二次握手
+								try {
+									flag = true;
+									clientThread.dos.writeUTF(mess);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		}
+	}
+}

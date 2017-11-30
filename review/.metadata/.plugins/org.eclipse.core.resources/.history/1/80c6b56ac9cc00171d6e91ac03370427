@@ -1,0 +1,57 @@
+package xtdxUser;
+
+import java.util.Scanner;
+
+public class ServerMain {
+
+	public static void main(String[] args) {
+		System.out.println("*******欢迎使用用户管理系统****");
+		System.out.println("1.用户列表");
+		System.out.println("2.添加用户");
+		System.out.println("3.删除用户");
+		System.out.println("4.编辑用户");
+		System.out.println("请选择（1-4）：");
+		Scanner sc=new Scanner(System.in);
+		//获取输入的类型
+		int type=sc.nextInt();
+		switch(type){ //判断选择
+			case 1: //用户列表
+				findAll();
+				break;
+			case 2://新增用户
+				add();
+				break;
+			case 3://删除用户
+				delete();
+				break;
+			case 4://编辑用户
+				update();
+				break;		
+		}
+		
+	}
+
+	private static void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void add() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 查询用户信息
+	 */
+	private static void findAll() {
+	
+		
+	}
+
+}

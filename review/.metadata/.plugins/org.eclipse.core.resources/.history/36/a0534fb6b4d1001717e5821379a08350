@@ -1,0 +1,63 @@
+package com.xtu.server;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 服务端用来不断地接收和发送信息   向客户端
+ * 每一个客户端都会对应一个该类的对象
+ * @author Administrator
+ */
+public class ClientThread extends Thread{
+	
+	public DataInputStream dis;//用来读取数据
+	public DataOutputStream dos; // 向客户端发送数据
+	private Socket socket;
+	private ServerThread serverThread;
+	public boolean flag_exit = false;
+	public ClientThread(Socket socket, ServerThread serverThread) {
+		this.socket = socket;
+		this.serverThread = serverThread;
+		try {
+			dis = new DataInputStream(socket.getInputStream());
+			dos = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	// 该方法会不断地接收数据，保存到message中
+	public void run(){
+		while(flag_exit){
+			try {
+				String mess = dis.readUTF();
+				if(mess.contains("@login")){
+					//字符串切割成字符串数组
+					String[] userInfo = mess.split("@login");
+					int threadID = Integer.parseInt(userInfo[1]);
+					//将用户名保存到  users
+					synchronized(serverThread.users){
+						serverThread.users.remove(threadID);
+						serverThread.users.put(threadID, userInfo[0]);
+					}
+				}else{
+					if(mess.contains("@chat")){
+						String[] str = mess.split("@chat");
+						//将信息显示到服务器界面
+						StringBuffer sb  = new StringBuffer();
+						String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+						sb.append(str[0]+"   "+date);
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}

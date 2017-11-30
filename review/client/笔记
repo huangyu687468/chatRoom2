@@ -1,0 +1,21 @@
+网络编程:Socket编程
+两台计算机实现通信需要:IP地址 ,端口号
+TCP协议:
+    客户端:Socket     Socket socket = new Socket(String id,int prot);
+    服务端:ServerSocket  ServerSocket serverSocket = new ServerSocket(int 5000);
+    端口号:  0~65535   1024~65535
+    
+UDP协议:
+
+如何得到IO流
+InputStream in = socket.getInputStream()
+OutputStream os = socket.getOutputStream()
+在服务端:
+Socket socket = serverSocket.accept();
+
+多线程:
+
+集合:
+
+Swing:
+

@@ -1,0 +1,25 @@
+package com.xtu.server;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+
+/**
+ * 服务器线程类  用来跟每个客户端建立连接
+ * @author Administrator
+ */
+public class ServerThread extends Thread{
+	
+	private ServerSocket serverSocket;
+	private ServerFrame serverFrame;
+	public ServerThread(ServerFrame serverFrame) {
+		this.serverFrame = serverFrame;
+		//创建ServerSocket对象
+		try {
+			serverSocket = new ServerSocket(5000);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

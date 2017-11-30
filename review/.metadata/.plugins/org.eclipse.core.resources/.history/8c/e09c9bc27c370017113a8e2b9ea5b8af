@@ -1,0 +1,8 @@
+package com.talk.dao;
+
+import com.talk.entity.Customer;
+
+public class BaseDao {
+	private Customer cus;
+
+}

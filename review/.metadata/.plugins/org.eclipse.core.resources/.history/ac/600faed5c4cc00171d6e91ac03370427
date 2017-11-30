@@ -1,0 +1,14 @@
+package xtdxUser;
+
+/**
+ * 用户类
+ * @author ty
+ *
+ */
+public class User {
+
+	//编号
+	private Integer id;
+	//姓名
+	private String name;
+}

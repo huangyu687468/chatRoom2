@@ -1,0 +1,94 @@
+package xtdxUser;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class ServerMain {
+
+	public static void main(String[] args) {
+		System.out.println("*******欢迎使用用户管理系统****");
+		System.out.println("1.用户列表");
+		System.out.println("2.添加用户");
+		System.out.println("3.删除用户");
+		System.out.println("4.编辑用户");
+		System.out.println("请选择（1-4）：");
+		Scanner sc=new Scanner(System.in);
+		//获取输入的类型
+		int type=sc.nextInt();
+		switch(type){ //判断选择
+			case 1: //用户列表
+				findAll();
+				break;
+			case 2://新增用户
+				add();
+				break;
+			case 3://删除用户
+				delete();
+				break;
+			case 4://编辑用户
+				update();
+				break;		
+		}
+		
+	}
+
+	private static void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void add() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//相当于数组，java中叫做集合
+	private static List<User> list=new ArrayList<User>();
+	
+	/**
+	 * 查询用户信息
+	 */
+	private static void findAll() {
+		
+		Scanner sc=new Scanner(System.in);
+		
+		User zhangsan=new User();
+		zhangsan.setId(1);
+		zhangsan.setName("张三");
+		zhangsan.setSex("男");
+		zhangsan.setAge(28);
+		//list.add(zhangsan);
+		//size() 获取集合中存储的数量
+		//add() 添加数据到集合
+		//for循环打印数据
+		System.out.println("编号\t姓名\t年龄\t性别");
+		for(int i=0;i<list.size();i++){
+			System.out.println(zhangsan.getId()+"\t"
+		     +zhangsan.getName()+"\t"+zhangsan.getAge()
+		     +"\t"+zhangsan.getSex());
+		}
+		//判断是否存在数据
+		if(list.size()==0){
+			System.out.println("暂无数据！");
+		}
+		
+		System.out.println("返回菜单，请输入return");
+		String str=sc.nextLine();
+		//equals字符串进行判断
+		while(!"return".equals(str)){
+			System.out.println("输入错误，请输入：return");
+			str=sc.nextLine();
+		}
+		
+			
+		
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.xtu.server;
+
+public class ServerThread {
+
+}

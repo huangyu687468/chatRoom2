@@ -1,0 +1,36 @@
+java网络编程聊天室的实现
+   1.需要的东西？
+     一:Socket 网络编程
+      a.ip地址,端口号    Socket
+                端口号 只能是  0~65535
+                但是0~1024 被系统使用或者保留
+      b.协议     TCP   UDP
+        UDP:不需要建立专门的链接，数据采用数据包的形式发送
+            每个数据包最大不能超过64k,效率比较快，但是数据没有那么安全
+      
+        TCP:  三次握手协议   效率慢一点  ，数据安全性高
+        
+     二:多线程
+     
+     三:IO流
+     
+     四:GUI图形组件
+      java.awt  重量级  Frame
+      javax.swing  轻量级   窗体 JFrame
+      
+      
+  服务端具有的类
+     1.ServerFrame   服务端的界面
+     2.Server        服务器
+     3.ServerThread  不断的监听从客户端发送过来的请求
+     4.ClientThread  不断接受来自所有客户端的信息，将信息处理以后
+                     然后，将信息保存到 ServerThread中定义的容器中
+     5.BroadCast     将ServerThread中容器中的信息，一条条广播给
+                                        所有客户端
+                                        
+客户端类
+     Client  客户端    不断向服务器发送信息，并且不断从服务器接收信息
+     EnterFrame  登陆界面
+     ChatFrame　　聊天界面
+        
+        

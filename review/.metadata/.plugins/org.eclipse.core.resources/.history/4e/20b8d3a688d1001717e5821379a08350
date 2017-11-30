@@ -1,0 +1,20 @@
+package com.xtu.server;
+
+import javax.swing.JFrame;
+
+/**
+ * 服务器界面
+ * @author Administrator
+ */
+public class ServerFrame extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Server server;
+	public ServerFrame(Server server) {
+		this.server = server;
+	}
+
+}

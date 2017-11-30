@@ -1,0 +1,6 @@
+package com.talk.dao;
+
+public class BaseDao {
+	Customer cus;
+
+}

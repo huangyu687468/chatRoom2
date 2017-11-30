@@ -1,0 +1,75 @@
+package com.xtu.client;
+
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+/**
+ * 登陆界面
+ * @author Administrator
+ */
+public class EnterFrame extends JFrame{
+
+	//定义组件
+	private JLabel jlb_user;//用户名
+	private JLabel jlb_ip;//ip地址
+	private JLabel jlb_post;//端口号
+	private JTextField jtf_user;
+	private JTextField jtf_ip;
+	private JTextField jtf_post;
+	private JButton jbt_enter;
+	private JButton jbt_exit;
+	
+	
+	
+	private Client client ;
+	public EnterFrame(Client client) {
+		this.client = client;
+		// 设置大小
+		this.setBounds(300, 200, 320, 280);
+		this.setLayout(null);
+		this.setResizable(false);
+		this.setTitle("聊天室");
+		
+		this.addWindowListener(new WindowAdapter(){
+			
+		});
+		
+		jlb_user = new JLabel("用户名");
+		jlb_user.setFont(new Font("宋体",Font.PLAIN,14));
+		jlb_user.setBounds(20, 20, 80, 30);
+		this.add(jlb_user);// 将标签添加到当前的窗口中间
+		
+		jlb_ip = new JLabel("服务器地址");
+		jlb_ip.setFont(new Font("宋体",Font.PLAIN,14));
+		jlb_ip.setBounds(20, 70, 80, 30);
+		this.add(jlb_ip);// 将标签添加到当前的窗口中间
+		
+		jlb_post = new JLabel("端口号");
+		jlb_post.setFont(new Font("宋体",Font.PLAIN,14));
+		jlb_post.setBounds(20, 120, 80, 30);
+		this.add(jlb_post);// 将标签添加到当前的窗口中间
+		
+		jtf_user = new JTextField();
+		jtf_user.setBounds(120, 20, 150, 30);
+		this.add(jtf_user);
+		
+		jtf_ip = new JTextField();
+		jtf_ip.setBounds(120, 70, 150, 30);
+		this.add(jtf_ip);
+		
+		jtf_user = new JTextField();
+		jtf_user.setBounds(120, 120, 150, 30);
+		this.add(jtf_user);
+		
+		jbt_exit = new JButton("退出聊天室");
+		jbt_exit.setFont(new Font("宋体",Font.PLAIN,14));
+		jbt_exit.setBounds(20, 170, 120, 30);
+		this.add(jbt_exit);
+	}
+
+}

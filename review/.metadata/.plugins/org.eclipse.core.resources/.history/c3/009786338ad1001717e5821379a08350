@@ -1,0 +1,35 @@
+package com.xtu.server;
+
+/**
+ * 服务器
+ * @author Administrator
+ *
+ */
+public class Server {
+	
+	private ServerFrame serverFrame;
+	
+	public ServerFrame getServerFrame() {
+		return serverFrame;
+	}
+
+	public void setServerFrame(ServerFrame serverFrame) {
+		this.serverFrame = serverFrame;
+	}
+
+	public static void main(String[] args) {
+		//创建服务器对象
+		Server server = new Server();
+		ServerFrame serverFrame = new ServerFrame(server);
+		server.setServerFrame(serverFrame);
+		serverFrame.setVisible(true);
+	}
+
+	/**
+	 * 启动服务器
+	 */
+	public void start() {
+		ServerThread serverThread = new ServerThread();
+	}
+
+}

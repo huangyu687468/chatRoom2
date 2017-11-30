@@ -1,0 +1,12 @@
+package xtdxUser;
+
+public class JdbcDemo {
+
+	public static void main(String[] args)throws Exception {
+		//java ·´Éä»úÖÆ
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		
+	}
+
+}

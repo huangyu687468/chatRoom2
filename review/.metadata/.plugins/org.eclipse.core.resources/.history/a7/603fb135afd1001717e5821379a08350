@@ -1,0 +1,46 @@
+package com.xtu.server;
+
+/**
+ * 该类用来不停地向客户端广播数据
+ * @author Administrator
+ */
+public class BroadCast extends Thread{
+
+	private ServerThread serverThread;
+	public boolean flag_exit = false;
+	private String mess;
+	public BroadCast(ServerThread serverThread) {
+		this.serverThread = serverThread;
+	}
+	
+	public void run(){
+		//如何向客户端发送数据呢？
+		while(flag_exit){
+			boolean flag = true;
+			//从容器中拿出数据，先判断容器中是否有数据
+			if(serverThread.message.isEmpty()){
+				continue;
+			}else{
+				//同步代码块，一个线程在操作的时候不允许
+				//另外的线程操作
+				synchronized(serverThread.message){
+					//获取第一条信息
+					mess = serverThread.message.firstElement();
+					//删除该信息
+					serverThread.message.remove(mess);
+					if(serverThread.message.contains("@clientThread")){
+						flag = false;
+					}
+				}
+				//遍历线程集合 取得每一个线程
+				for(int i = 0; i<serverThread.clients.size();i++){
+					//获得线程ID 
+					int threadID = (int)serverThread.clients.get(i).getId();
+					if(flag){
+						
+					}
+				}
+			}
+		}
+	}
+}

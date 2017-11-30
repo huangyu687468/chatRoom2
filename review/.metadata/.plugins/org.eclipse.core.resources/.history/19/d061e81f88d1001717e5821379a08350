@@ -1,0 +1,18 @@
+package com.xtu.server;
+
+/**
+ * 服务器
+ * @author Administrator
+ *
+ */
+public class Server {
+	
+	private ServerFrame serverFrame;
+	
+	public static void main(String[] args) {
+		//创建服务器对象
+		Server server = new Server();
+		ServerFrame serverFrame = new ServerFrame(server);
+	}
+
+}

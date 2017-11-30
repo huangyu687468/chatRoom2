@@ -1,0 +1,14 @@
+package com.xtu.server;
+
+/**
+ * 服务器线程类  用来跟每个客户端建立连接
+ * @author Administrator
+ *
+ */
+public class ServerThread {
+
+	public ServerThread(ServerFrame serverFrame) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

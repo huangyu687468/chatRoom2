@@ -1,0 +1,16 @@
+package com.xtu.server;
+
+/**
+ * ·şÎñÆ÷
+ * @author Administrator
+ *
+ */
+public class Server {
+	
+	private S¶øverFrame serverFrame£»
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

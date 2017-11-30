@@ -1,0 +1,30 @@
+package xtdxUser;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class JdbcDemo {
+
+	public static void main(String[] args)throws Exception {
+		//java 反射机制 ,加载驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		String url="jdbc:mysql://localhost:3306/usermgr";
+		String user="root";
+		String password="root";
+		//1.获取连接对象
+		Connection con=DriverManager.getConnection(url, user, password);
+		//2.创建执行对象
+		Statement sm=con.createStatement();
+		String sql="select * from users ";
+		//executeQuery 一般只做select 操作,3.执行sql
+		//4.返回一个结果集
+		ResultSet rs=sm.executeQuery(sql);
+		//5.输出结果
+		while(rs.next()){
+			System.out.println(rs.getString("name"));
+		}
+	}
+
+}

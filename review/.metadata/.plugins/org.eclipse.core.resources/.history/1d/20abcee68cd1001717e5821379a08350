@@ -1,0 +1,60 @@
+package com.xtu.client;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+/**
+ * 客户端
+ * @author 王定   
+ */
+public class Client {
+	
+	private EnterFrame enterFrame;
+	private String username ;
+	private Client client;
+	public EnterFrame getEnterFrame() {
+		return enterFrame;
+	}
+	public void setEnterFrame(EnterFrame enterFrame) {
+		this.enterFrame = enterFrame;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	//主方法  程序的入口
+	public static void main(String[] args){
+		//创建客户端对象
+		Client client = new Client();
+		client.setClient(client);
+		//创建窗口对象
+		EnterFrame enterFrame = new EnterFrame(client);
+		enterFrame.setVisible(true);//让窗口显示
+	}
+	
+	public String login(String username,String ip ,String post){
+		this.username = username;
+		//在登陆方法中创建Socket 对象
+		try {
+			Socket socket = new Socket(ip,Integer.parseInt(post));
+		} catch (NumberFormatException e) {
+			return "端口号必须在 1024 到 65535 之间";
+		} catch (UnknownHostException e) {
+			return "服务器地址错误";
+		} catch (IOException e) {
+			return "连接异常";
+		}
+		return "true";
+	}
+	
+	/**
+	 * 打开聊天界面
+	 * @param username 当前登陆的用户名 显示在窗口上
+	 */
+	public void showChatFrame(String username) {
+		ChatFrame chatFrame = new ChatFrame(username,client);
+	}
+}

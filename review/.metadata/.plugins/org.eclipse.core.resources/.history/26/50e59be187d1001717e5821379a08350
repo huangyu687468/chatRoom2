@@ -1,0 +1,10 @@
+package com.xtu.server;
+
+/**
+ * 服务器界面
+ * @author Administrator
+ *
+ */
+public class ServerFrame {
+
+}
