@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * ¿Í»§¶Ë
- * @author Íõ¶¨   
+ * å®¢æˆ·ç«¯
+ * @author é»„å®‡  
  */
 public class Client extends Thread{
 	
@@ -21,7 +21,7 @@ public class Client extends Thread{
 	private int threadID;
 	private ChatFrame chatFrame;
 	public boolean flag_exit = false;
-	private String mess;//¿Í»§¶Ë¶ÁÈ¡À´×Ô·şÎñÆ÷µÄÏûÏ¢
+	private String mess;//å®¢æˆ·ç«¯è¯»å–æ¥è‡ªæœåŠ¡å™¨çš„æ¶ˆæ¯
 	public EnterFrame getEnterFrame() {
 		return enterFrame;
 	}
@@ -34,37 +34,37 @@ public class Client extends Thread{
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	//Ö÷·½·¨  ³ÌĞòµÄÈë¿Ú
+	//ä¸»æ–¹æ³•  ç¨‹åºçš„å…¥å£
 	public static void main(String[] args){
-		//´´½¨¿Í»§¶Ë¶ÔÏó
+		//åˆ›å»ºå®¢æˆ·ç«¯å¯¹è±¡
 		Client client = new Client();
 		client.setClient(client);
-		//´´½¨´°¿Ú¶ÔÏó
+		//åˆ›å»ºçª—å£å¯¹è±¡
 		EnterFrame enterFrame = new EnterFrame(client);
-		enterFrame.setVisible(true);//ÈÃ´°¿ÚÏÔÊ¾
+		enterFrame.setVisible(true);//è®©çª—å£æ˜¾ç¤º
 	}
 	
 	public String login(String username,String ip ,String post){
 		this.username = username;
-		//ÔÚµÇÂ½·½·¨ÖĞ´´½¨Socket ¶ÔÏó
+		//åœ¨ç™»é™†æ–¹æ³•ä¸­åˆ›å»ºSocket å¯¹è±¡
 		try {
 			socket = new Socket(ip,Integer.parseInt(post));
 		} catch (NumberFormatException e) {
-			return "¶Ë¿ÚºÅ±ØĞëÔÚ 1024 µ½ 65535 Ö®¼ä";
+			return "ç«¯å£å·å¿…é¡»åœ¨ 1024 åˆ° 65535 ä¹‹é—´";
 		} catch (UnknownHostException e) {
-			return "·şÎñÆ÷µØÖ·´íÎó";
+			return "æœåŠ¡å™¨åœ°å€é”™è¯¯";
 		} catch (IOException e) {
-			return "Á¬½ÓÒì³£";
+			return "è¿æ¥å¼‚å¸¸";
 		}
 		return "true";
 	}
 	
 	/**
-	 * ´ò¿ªÁÄÌì½çÃæ
-	 * @param username µ±Ç°µÇÂ½µÄÓÃ»§Ãû ÏÔÊ¾ÔÚ´°¿ÚÉÏ
+	 * æ‰“å¼€èŠå¤©ç•Œé¢
+	 * @param username å½“å‰ç™»é™†çš„ç”¨æˆ·å æ˜¾ç¤ºåœ¨çª—å£ä¸Š
 	 */
 	public void showChatFrame(String username) {
-		//³õÊ¼»¯ioÁ÷
+		//åˆå§‹åŒ–ioæµ
 		initData();
 		ChatFrame chatFrame = new ChatFrame(username,client);
 		this.chatFrame = chatFrame;
@@ -81,20 +81,20 @@ public class Client extends Thread{
 		}
 	}
 	/**
-	 * ¿Í»§¶Ë²»Í£µØ½ÓÊÕÀ´×Ô·şÎñ¶ËµÄĞÅÏ¢
+	 * å®¢æˆ·ç«¯ä¸åœåœ°æ¥æ”¶æ¥è‡ªæœåŠ¡ç«¯çš„ä¿¡æ¯
 	 */
 	public void run(){
 		while(flag_exit){
-			//¿Í»§¶Ë¶ÁÈ¡Êı¾İ
+			//å®¢æˆ·ç«¯è¯»å–æ•°æ®
 			try {
 				 mess = dis.readUTF();
 				 System.out.println(mess);
-				//Èç¹ûĞÅÏ¢ÖĞ°üº¬@clientThread ËµÃ÷ÊÇµÚ¶ş´ÎÎÕÊÖ
+				//å¦‚æœä¿¡æ¯ä¸­åŒ…å«@clientThread è¯´æ˜æ˜¯ç¬¬äºŒæ¬¡æ¡æ‰‹
 				if(mess.contains("@clientThread")){
-					//ÇĞ¸îÏûÏ¢µÄÄÚÈİ
+					//åˆ‡å‰²æ¶ˆæ¯çš„å†…å®¹
 					int index = mess.indexOf("@clientThread");
 					threadID = Integer.parseInt(mess.substring(0,index));
-					//½«ÓÃ»§ÃûĞÅÏ¢·¢ËÍ¸ø·şÎñÆ÷
+					//å°†ç”¨æˆ·åä¿¡æ¯å‘é€ç»™æœåŠ¡å™¨
 					dos.writeUTF(username+"@login"+threadID+"@login");
 				}else{
 					if(mess.contains("@chat")){
@@ -115,7 +115,7 @@ public class Client extends Thread{
 			}
 		}
 	}
-	// ·¢ËÍÊı¾İ
+	// å‘é€æ•°æ®
 	public void tranMess(String mess) {
 		try {
 			dos.writeUTF(username+"@chat"+threadID+"@chat"+mess+"@chat");
@@ -124,7 +124,7 @@ public class Client extends Thread{
 			e.printStackTrace();
 		}
 	}
-	// Í»³öÁÄÌì
+	// çªå‡ºèŠå¤©
 	public void exitChat() {
 		if(socket!=null){
 			try {
@@ -137,7 +137,7 @@ public class Client extends Thread{
 		}
 	}
 	
-	//¸Ã·½·¨ÔÚ¿Í»§¶ËÍË³öÁÄÌìÊÒµÄÊ±ºòµ÷ÓÃ
+	//è¯¥æ–¹æ³•åœ¨å®¢æˆ·ç«¯é€€å‡ºèŠå¤©å®¤çš„æ—¶å€™è°ƒç”¨
 	public void exitClient() {
 		try {
 			dos.writeUTF(username+"@exit"+threadID+"@exit");
