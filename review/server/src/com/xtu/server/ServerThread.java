@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * ·şÎñÆ÷Ïß³ÌÀà  ÓÃÀ´¸úÃ¿¸ö¿Í»§¶Ë½¨Á¢Á¬½Ó
+ * æœåŠ¡å™¨çº¿ç¨‹ç±»  ç”¨æ¥è·Ÿæ¯ä¸ªå®¢æˆ·ç«¯å»ºç«‹è¿æ¥
  * @author Administrator
  */
 public class ServerThread extends Thread{
@@ -16,36 +16,36 @@ public class ServerThread extends Thread{
 	private ServerSocket serverSocket;
 	public ServerFrame serverFrame;
 	public boolean flag_exit = false;
-	//±£´æ·şÎñÆ÷ÓëÃ¿¸ö¿Í»§¶ËµÄÁ¬½Ó
+	//ä¿å­˜æœåŠ¡å™¨ä¸æ¯ä¸ªå®¢æˆ·ç«¯çš„è¿æ¥
 	public Vector<ClientThread> clients;
-	//±£´æ ·şÎñÆ÷ĞèÒª·¢ËÍ¸ø¿Í»§¶ËµÄĞÅÏ¢
+	//ä¿å­˜ æœåŠ¡å™¨éœ€è¦å‘é€ç»™å®¢æˆ·ç«¯çš„ä¿¡æ¯
 	public Vector<String> message;
-	//±£´æÃ¿¸ö¿Í»§¶ËµÄÏß³Ìid ºÍÓÃ»§Ãû
+	//ä¿å­˜æ¯ä¸ªå®¢æˆ·ç«¯çš„çº¿ç¨‹id å’Œç”¨æˆ·å
 	public Map<Integer,String> users;
 	public ServerThread(ServerFrame serverFrame) {
 		clients = new Vector<ClientThread>();
 		message = new Vector<String>();
 		users = new HashMap<Integer,String>();
 		this.serverFrame = serverFrame;
-		//´´½¨ServerSocket¶ÔÏó
+		//åˆ›å»ºServerSocketå¯¹è±¡
 		try {
 			serverSocket = new ServerSocket(5000);
 		} catch (IOException e) {
 			serverFrame.showMessage();
 		}
 		
-		// ¿ªÆôÏò¿Í»§¶Ë¹ã²¥µÄÏß³ÌÀà
+		// å¼€å¯å‘å®¢æˆ·ç«¯å¹¿æ’­çš„çº¿ç¨‹ç±»
 		BroadCast broadCast = new BroadCast(this);
 		broadCast.flag_exit = true;
 		broadCast.start();
 	}
 	
-	//ÖØĞ´run·½·¨
+	//é‡å†™runæ–¹æ³•
 	public void run(){
-		//ÔÚ¸Ã·½·¨ÖĞ£¬·şÎñÆ÷ĞèÒª²»¶ÏµØ½ÓÊÕÀ´×Ô¿Í»§¶ËµÄÁ¬½ÓÇëÇó
+		//åœ¨è¯¥æ–¹æ³•ä¸­ï¼ŒæœåŠ¡å™¨éœ€è¦ä¸æ–­åœ°æ¥æ”¶æ¥è‡ªå®¢æˆ·ç«¯çš„è¿æ¥è¯·æ±‚
 		Socket socket ;
 		while(flag_exit){
-			//Í¨¹ıServerSocket »ñÈ¡Socket¶ÔÏó
+			//é€šè¿‡ServerSocket è·å–Socketå¯¹è±¡
 			try {
 				socket = serverSocket.accept();
 			} catch (IOException e) {
@@ -55,20 +55,20 @@ public class ServerThread extends Thread{
 			if(socket!=null){
 				ClientThread clientThread = new ClientThread(socket,this);
 				clientThread.flag_exit = true;
-				//¿ªÆôÏß³Ì
+				//å¼€å¯çº¿ç¨‹
 				clientThread.start();
 				
-				// ±£´æÃ¿¸öÓÃ»§¶ÔÓ¦µÄclientThread¶ÔÏó
+				// ä¿å­˜æ¯ä¸ªç”¨æˆ·å¯¹åº”çš„clientThreadå¯¹è±¡
 				synchronized(clients){
 					clients.addElement(clientThread);
 				}
 				
-				//ÎªÁËÍê³ÉµÚ¶ş´ÎÎÕÊÖ£¬·şÎñÆ÷Íü¿Í»§¶Ë·¢ËÍµÄ¶«Î÷
-				// Ïß³Ìid
+				//ä¸ºäº†å®Œæˆç¬¬äºŒæ¬¡æ¡æ‰‹ï¼ŒæœåŠ¡å™¨å¾€å®¢æˆ·ç«¯å‘é€çš„ä¸œè¥¿
+				// çº¿ç¨‹id
 				synchronized(message){
-					//»ñÈ¡Ïß³Ìid 
+					//è·å–çº¿ç¨‹id 
 					int threadID = (int)clientThread.getId();
-					users.put(threadID, "@login@");//±£´æ
+					users.put(threadID, "@login@");//ä¿å­˜
 					message.add(threadID+"@clientThread");
 				}
 			}
